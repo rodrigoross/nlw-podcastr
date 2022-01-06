@@ -22,8 +22,6 @@ type HomeProps = {
 };
 
 export default function Home(props: HomeProps) {
-  console.log(props.episodes);
-
   return (
     <div>
       <h1>Index</h1>
@@ -41,7 +39,7 @@ export const getStaticProps: GetStaticProps = async () => {
     },
   });
 
-  const episode: Episode[] = data.map((episode) => {
+  const episodes: Episode[] = data.map((episode) => {
     return {
       id: episode.id,
       title: episode.title,
