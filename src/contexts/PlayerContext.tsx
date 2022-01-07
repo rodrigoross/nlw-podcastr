@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 
 interface Episode {
   title: string;
@@ -55,16 +55,16 @@ export function PlayerContextProvider({
   }
 
   const hasPrevious = currentEpisodeIndex > 0;
-  const hasNext = (currentEpisodeIndex + 1) < episodeList.length;
+  const hasNext = currentEpisodeIndex + 1 < episodeList.length;
 
   function playNext() {
-   if (hasNext) {
+    if (hasNext) {
       setcurrentEpisodeIndex(currentEpisodeIndex + 1);
     }
   }
 
   function playPrevious() {
-   if (hasPrevious) {
+    if (hasPrevious) {
       setcurrentEpisodeIndex(currentEpisodeIndex - 1);
     }
   }
@@ -82,10 +82,15 @@ export function PlayerContextProvider({
         setPlayingState,
         playList,
         hasPrevious,
-        hasNext
+        hasNext,
       }}
     >
       {children}
     </PlayerContext.Provider>
   );
 }
+
+// Para otimizar as importacoes e ja importar com o pacote de useContext junto
+export const usePlayer = () => {
+  return useContext(PlayerContext);
+};
