@@ -120,6 +120,15 @@
       filter: brightness(0.75);
     }
 
+    // Como o svg esta como tag img a classe css faz uma alteracao css para mudar a cor do icone
+    &.isActive {
+      filter: invert(0.35) sepia(1) saturate(3) hue-rotate(100deg); // muda a cor da img pra verde
+    }
+
+    &.isActive:hover {
+      filter: brightness(0.6) invert(0.35) sepia(1) saturate(3) hue-rotate(100deg);
+    }
+
     &.playButton {
       width: 4rem;
       height: 4rem;
