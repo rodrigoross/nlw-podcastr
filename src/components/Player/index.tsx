@@ -24,6 +24,7 @@ export function Player() {
     playPrevious,
     hasPrevious,
     hasNext,
+    clearPlayerState
   } = usePlayer();
 
   //Inicia o estado do slider dentro do componente
@@ -52,6 +53,14 @@ export function Player() {
   function handleSeek(amount: number) {
     audioRef.current.currentTime = amount;
     setProgress(amount);
+  }
+
+  function handleEpisodeEnded() {
+    if (hasNext) {
+      playNext()
+    } else {
+      clearPlayerState()
+    }
   }
 
   const episode = episodeList[currentEpisodeIndex];
@@ -107,6 +116,7 @@ export function Player() {
             autoPlay
             loop={isLooping}
             ref={audioRef}
+            onEnded={handleEpisodeEnded}
             onPlay={() => setPlayingState(true)}
             onPause={() => setPlayingState(false)}
             onLoadedMetadata={setupProgressListener}
